@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bab prototype</title>
+  </head>
+
+  <style>
+body {
+  font-size:2em;
+}
+div {
+  transition: all 2s ease-out;
+/*  scroll-behavior: smooth;*/
+}
+
+  </style>
+
+    <a style="position:fixed;margin:5px;background:black;color:white;" onclick="scrollAcross('home');">home</a>
+
+  <body>
+    <div id="home" style="background:yellow;display:block;width:200px;padding-top:100px;">
+      <a onclick="scrollAcross('audio1');">scroll audio</a><br />
+      <a onclick="scrollAcross('video2');">scroll video2</a><br />
+      <a onclick="scrollAcross('video');">scroll video</a><br />
+    </div>
+
+  <div id="video" style="position:absolute;top:3000px;left:3000px;background:black;width:500px;height:500px;">
+    <video style="50%;" controls src="1.mov"></video>
+  </div>
+
+  <div id="video2" style="position:absolute;top:1000px;left:2000px;background:red;width:500px;height:500px;">
+    <video style="50%;" controls src="2.mov"></video>
+  </div>
+
+  <div id="audio1" style="position:absolute;top:2000px;left:1000px;background:blue;width:500px;height:500px;">
+    <audio controls src="1.mp3"></audio>
+  </div>
+
+<script>
+
+
+function scrollAcross(id, block) {
+  let el = document.getElementById(id);
+  block = block || "nearest";
+  if (el) el.scrollIntoView({behavior: 'smooth', block: block, inline: 'center'});
+//  window.location.hash = id;
+}
+
+if (window.location.hash != "") {
+console.log(window.location.hash,'scroll to ',window.location.hash.split('#')[1]);
+  scrollAcross(window.location.hash.split('#')[1]);
+} 
+
+addEventListener("hashchange", (event) => {
+  scrollAcross(location.hash.split('#')[1]);
+});
+
+</script>
+
+  </body>
+</html>
